@@ -1,0 +1,64 @@
+@page
+{
+    size: auto; /* auto is the current printer page size */
+    margin: 0mm; /* this affects the margin in the printer settings */
+}
+
+body
+{
+    background-color: #FFFFFF;
+    color: black;
+    margin: 0px 20mm; /* the margin on the content before printing */
+    font-size: 1.2em;
+}
+
+address
+{
+    margin-bottom: 0;
+}
+
+.page-header h5
+{
+    margin-bottom: 1mm;
+}
+
+.page-header
+{
+    border-bottom-color: black;
+    margin-bottom: 2mm;
+    margin-top: 8mm;
+}
+
+.col-md-12.page-header
+{
+    margin-top: 2mm;
+    margin-bottom: 2mm;
+    padding-bottom: 0;
+}
+
+.row.insert-gap
+{
+    margin-bottom: 3mm;
+}
+
+.no-left-padding
+{
+    padding-left: 0;
+}
+
+.row.page-header
+{
+    margin-top: 0;
+    margin-bottom: 2mm;
+}
+
+.sc-preview
+{
+    line-height: 1.2em;
+}
+
+.sc-signatures .col-xs-offset-1
+{
+    margin-top: 6mm;
+    border-bottom: 1px solid black;
+}

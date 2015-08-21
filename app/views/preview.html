@@ -1,0 +1,163 @@
+﻿<div class="header clearfix hidden-print">
+  <nav>
+    <ul class="nav nav-pills pull-right">
+      <li role="presentation"><a href="#/home">Início</a></li>
+      <li role="presentation" class="active"><a href="#/preview">Relatório</a></li>
+    </ul>
+  </nav>
+  <h3 class="text-primary">Controle da Balança</h3>
+</div>
+
+
+<div class="btn-group pull-right hidden-print" role="group" aria-label="Ações">
+  <button type="button" class="btn btn-default" ng-click="changeView('/home')">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Voltar
+  </button>
+  <button type="button" class="btn btn-default" onclick="window.print()">
+    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;Imprimir
+  </button>
+</div>
+
+<div class="container sc-preview">
+  <div class="row text-center">
+    <div class="col-md-12 page-header">
+      <h5><strong><em>CEREALISTA AGROWESTRUP LTDA</em></strong></h5>
+      <address>
+        <em>RUA GREGÓRIO WESTRUP, SÃO GABRIEL</em><br>
+        <em>FORQUILHINHA - SC 88850-000</em><br>
+        <em>Fone: (48) 9182-8025</em>
+      </address>
+    </div>
+  </div>
+  <div class="row insert-gap">
+    <div class="col-xs-2 text-right">Entrada:</div>
+    <div class="col-xs-4">{{ data.inTime | date:'H:mm' }}</div>
+    <div class="col-xs-6 text-right">Placa: {{ data.plate }}</div>
+    <div class="col-xs-2 text-right">Saída:</div>
+    <div class="col-xs-10">{{ data.outTime | date:'H:mm' }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2 text-right">Fornecedor:</div>
+    <div class="col-xs-10">{{ data.supplier | uppercase }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 text-right">Produto:</div>
+    <div class="col-xs-10">{{ data.product | uppercase }}</div>
+  </div>
+  <div class="row insert-gap">
+    <div class="col-xs-2 text-right">Emissão:</div>
+    <div class="col-xs-10">{{ data.date | date:'dd/MM/yyyy' }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2 text-right text-nowrap">Bruto:</div>
+    <div class="col-xs-4">
+      <div class="row">
+        <div class="col-xs-4 no-left-padding text-right">{{ data.grossWeight | numeral }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 text-right">Tara:</div>
+    <div class="col-xs-4">
+      <div class="row">
+        <div class="col-xs-4 no-left-padding text-right">{{ data.tareWeight | numeral }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 text-right">Saldo:</div>
+    <div class="col-xs-4">
+      <div class="row">
+        <div class="col-xs-4 no-left-padding text-right">{{ data.netWeight | numeral }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row page-header"></div>
+
+  <div class="row">
+    <div class="col-xs-2 text-right">Umidade:</div>
+    <div class="col-xs-2">
+      <div class="row">
+        <div class="col-xs-8 text-right">{{ data.deductions.humidity.kg | numeral }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+    <div class="col-xs-2 text-right">{{ data.deductions.humidity.pct | numeral:'0.0' }} %</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 text-right">Impurezas:</div>
+    <div class="col-xs-2">
+      <div class="row">
+        <div class="col-xs-8 text-right">{{ data.deductions.impurities.kg | numeral }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+    <div class="col-xs-2 text-right">{{ data.deductions.impurities.pct | numeral:'0.0' }} %</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 text-right">Gesso:</div>
+    <div class="col-xs-2">
+      <div class="row">
+        <div class="col-xs-8 text-right">{{ data.deductions.badGrain.kg | numeral }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+    <div class="col-xs-2 text-right">{{ data.deductions.badGrain.pct | numeral:'0.0' }} %</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 text-right">Outros:</div>
+    <div class="col-xs-2">
+      <div class="row">
+        <div class="col-xs-8 text-right">{{ data.deductions.misc.kg }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+    <div class="col-xs-2 text-right">{{ data.deductions.misc.pct | numeral:'0.0' }} %</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 text-right">Secagem:</div>
+    <div class="col-xs-2">
+      <div class="row">
+        <div class="col-xs-8 text-right">{{ data.deductions.drying.kg }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+    <div class="col-xs-2 text-right">{{ data.deductions.drying.pct | numeral:'0.0' }} %</div>
+  </div>
+
+  <div class="row page-header"></div>
+
+  <div class="row insert-gap">
+    <div class="col-xs-2 text-right">Líquido:</div>
+    <div class="col-xs-2">
+      <div class="row">
+        <div class="col-xs-8 text-right">{{ data.netWeightFinal.kg | numeral }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+    <div class="col-xs-2 text-right">{{ data.netWeightFinal.sacks | numeral:'0,0.0' }}</div>
+    <div class="col-xs-1 no-left-padding text-right">sacos</div>
+  </div>
+
+  <div class="visible-print-block">
+    <div class="row sc-signatures">
+      <div class="col-xs-4 col-xs-offset-1"></div>
+      <div class="col-xs-4 col-xs-offset-1"></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-1 text-center">Responsável - Balança</div>
+      <div class="col-xs-4 col-xs-offset-1 text-center">Motorista</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer hidden-print">
+  <p>&copy; Ricardo Junkes Ricken, 2015</p>
+</footer>

@@ -1,0 +1,229 @@
+﻿<div class="header clearfix">
+  <nav>
+    <ul class="nav nav-pills pull-right">
+      <li role="presentation" class="active"><a href="#/home">Início</a></li>
+      <li role="presentation"><a href="#/preview">Relatório</a></li>
+    </ul>
+  </nav>
+  <h3 class="text-primary">Controle da Balança</h3>
+</div>
+
+
+<div class="btn-group pull-right" role="group" aria-label="Ações">
+  <button type="button" class="btn btn-default" ng-click="resetForm()">
+    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Novo
+  </button>
+  <button type="button" class="btn btn-default" ng-click="changeView('/preview')">
+    Ver relatório 
+		<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+  </button>
+</div>
+
+<form class="form-horizontal">
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2" for="cb-info-date">Entrada</label>
+    <div class="col-sm-2" style="padding: 0">
+      <input class="form-control" type="time" id="cb-info-date" placeholder="HH:mm" ng-model="data.inTime">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-offset-2 col-sm-2" for="cb-info-date">Saída</label>
+      <div class="col-sm-2 col-sm-offset-2" style="padding: 0">
+        <input class="form-control" type="time" id="Time1" placeHolder="HH:mm" ng-model="data.outTime">
+      </div>
+    </div>
+  </div>
+
+
+</form>
+
+
+<!-- Header: Informações -------------------------------------->
+<div class="page-header clearfix">
+  <h4 class="text-primary">Informações</h4>
+</div>
+
+
+<form class="form-horizontal">
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cb-info-plate">Placa</label>
+    <div class="col-sm-2" style="padding-left: 0;">
+      <input class="form-control" type="text" id="cb-info-plate" ng-model="data.plate" ui-mask="AAA-9999">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cb-info-date">Emissão</label>
+    <div class="col-sm-3" style="padding: 0">
+      <input class="form-control" type="date" ng-model="data.date" id="Date1">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cb-info-supplier">Fornecedor</label>
+    <div class="col-sm-10" style="padding: 0;">
+      <input class="form-control" type="text" id="cb-info-supplier" placeholder="Nome do fornecedor" ng-model="data.supplier">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cb-info-product">Produto</label>
+    <div class="input-group col-sm-10">
+      <input class="form-control" type="text" id="cb-info-product" aria-label="..." placeholder="Escolha um produto" ng-model="data.product">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produtos <span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <!--<li><a href="#">Arroz em casca</a></li>
+              <li><a href="#">Milho</a></li>-->
+          <li ng-repeat="product in allProducts"><a href="#/home" ng-click="chooseProduct($index); return;">{{ product }}</a></li>
+        </ul>
+      </div>
+      <!-- /btn-group -->
+    </div>
+    <!-- /input-group -->
+  </div>
+  <!-- /from-group -->
+
+
+
+</form>
+<!-- /Header: Informações -->
+
+<!-- Header: Pesagem -------------------------------------->
+<div class="page-header">
+  <h4 class="text-primary">Pesagem</h4>
+</div>
+
+<form class="form-horizontal">
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cb-gross-wgh">Peso bruto</label>
+    <div class="input-group col-sm-3">
+      <input class="form-control" type="text" ng-model="data.grossWeight" id="cb-gross-wgh">
+      <span class="input-group-addon" id="basic-addon2">Kg</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cb-tare-wgh">Tara</label>
+    <div class="input-group col-sm-3">
+      <input class="form-control" type="number" ng-model="data.tareWeight" id="cb-tare-wgh">
+      <span class="input-group-addon" id="Span1">Kg</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cb-net-wgh">Saldo</label>
+    <div class="input-group col-sm-3">
+      <input class="form-control" type="number" ng-model="data.netWeight" id="cb-net-wgh" readonly>
+      <span class="input-group-addon" id="Span2">Kg</span>
+    </div>
+  </div>
+
+
+
+
+</form>
+
+<!-- /Header: Pesagem -->
+
+<!-- Header: Descontos -------------------------------------->
+<div class="page-header">
+  <h4 class="text-primary">Descontos <small>Calculado sobre o saldo</small></h4>
+</div>
+
+<form class="form-horizontal">
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2" for="cb-ded-humidity-pct">Umidade</label>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="number" id="cb-ded-humidity-pct" min="0" max="40" ng-model="data.deductions.humidity.pct">
+      <span class="input-group-addon" id="Span3">%</span>
+    </div>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="text" id="cb-ded-humidity-kg" ng-model="data.deductions.humidity.kg" readonly>
+      <span class="input-group-addon" id="Span4">Kg</span>
+    </div>
+  </div>
+  <!-- /form-group -->
+
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2" for="cb-ded-impurities-pct">Impureza</label>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="number" id="cb-ded-impurities-pct" min="0" max="100" ng-model="data.deductions.impurities.pct">
+      <span class="input-group-addon" id="Span5">%</span>
+    </div>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="text" id="cb-ded-impurities-kg" ng-model="data.deductions.impurities.kg" readonly>
+      <span class="input-group-addon" id="Span6">Kg</span>
+    </div>
+  </div>
+  <!-- /form-group -->
+
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2" for="cb-ded-badgrain-pct">Gesso</label>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="number" id="cb-ded-badgrain-pct" min="0" max="100" ng-model="data.deductions.badGrain.pct">
+      <span class="input-group-addon" id="Span7">%</span>
+    </div>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="text" id="cb-ded-badgrain-kg" ng-model="data.deductions.badGrain.kg" readonly>
+      <span class="input-group-addon" id="Span8">Kg</span>
+    </div>
+  </div>
+  <!-- /form-group -->
+
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2" for="cb-ded-misc-pct">Outros</label>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="number" id="cb-ded-misc-pct" min="0" max="100" ng-model="data.deductions.misc.pct">
+      <span class="input-group-addon" id="Span11">%</span>
+    </div>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="text" id="cb-ded-misc-kg" ng-model="data.deductions.misc.kg" readonly>
+      <span class="input-group-addon" id="Span12">Kg</span>
+    </div>
+  </div>
+  <!-- /form-group -->
+
+  <div class="page-header" style="margin-top: 0"></div>
+
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2" for="cb-ded-drying-pct">Secagem</label>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="number" id="cb-ded-drying-kg">
+      <span class="input-group-addon" id="Span9">%</span>
+    </div>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="number" id="cb-ded-drying-pct" readonly>
+      <span class="input-group-addon" id="Span10">Kg</span>
+    </div>
+  </div>
+  <!-- /form-group -->
+
+</form>
+<!-- /Header: Descontos -->
+
+
+<!-- Header: Resumo final -------------------------------------->
+
+<div class="page-header" style="margin-top: 0"></div>
+
+
+<form class="form-horizontal">
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2" for="cb-net-wgh-final">Peso líquido</label>
+    <div class="input-group col-sm-2">
+      <input class="form-control" type="text" id="cb-net-wgh-final-kg" ng-model="data.netWeightFinal.kg" readonly>
+      <span class="input-group-addon" id="Span13">Kg</span>
+    </div>
+    <div class="input-group col-sm-3">
+      <input class="form-control" type="text" id="cb-ded-impurities-sacos" ng-model="data.netWeightFinal.sacks" readonly>
+      <span class="input-group-addon" id="Span14">sacos</span>
+    </div>
+  </div>
+</form>
+
+<footer class="footer">
+  <p>&copy; Ricardo Junkes Ricken, 2015</p>
+</footer>

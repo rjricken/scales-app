@@ -1,0 +1,19 @@
+{
+  "name": "scales-app",
+  "description": "Manages the workflow of a ruck scale at Cerealista Agrowestrup Ltda.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/rjricken/scales-app",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+	"angular-ui-mask": "~1.4.2",
+	"bootstrap": "~3.3.5",
+    "html5-boilerplate": "~5.2.0",
+	"jquery": "~2.1.4",
+	"numeral": "~1.5.3"
+  }
+}
