@@ -130,7 +130,7 @@
 
 <!-- Header: Descontos -------------------------------------->
 <div class="page-header">
-  <h4 class="text-primary">Descontos <small>Calculado sobre o saldo</small></h4>
+  <h4 class="text-primary">Descontos</h4>
 </div>
 
 <form class="form-horizontal">
@@ -191,11 +191,11 @@
   <div class="form-group form-inline">
     <label class="control-label col-sm-2" for="cb-ded-drying-pct">Secagem</label>
     <div class="input-group col-sm-2">
-      <input class="form-control" type="number" id="cb-ded-drying-kg">
+      <input class="form-control" type="number" id="cb-ded-drying-kg" ng-model="data.deductions.drying.pct">
       <span class="input-group-addon" id="Span9">%</span>
     </div>
     <div class="input-group col-sm-2">
-      <input class="form-control" type="number" id="cb-ded-drying-pct" readonly>
+      <input class="form-control" type="text" id="cb-ded-drying-pct" ng-model="data.deductions.drying.kg" readonly>
       <span class="input-group-addon" id="Span10">Kg</span>
     </div>
   </div>

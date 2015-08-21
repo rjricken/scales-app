@@ -24,7 +24,7 @@ scalesControllers.controller('ScalesFormCtrl', ['$scope', '$location', 'DataMode
       });
 
       $scope.$watch('data.deductions.drying.pct', function () {
-         $scope.updateDeductions({ drying: true }, false);
+         $scope.updateDeductions({}, false, true);
       });
 
       $scope.$watch('data.deductions.misc.pct', function () {
@@ -55,24 +55,34 @@ scalesControllers.controller('ScalesFormCtrl', ['$scope', '$location', 'DataMode
       };
 
       $scope.updateDeductions = function (list, humidity, drying) {
-         list = list || { impurities: true, badGrain: true, drying: true, misc: true };
+         list = list || { impurities: true, badGrain: true, misc: true };
          humidity = humidity || true;
          drying = drying || true;
 
-         for (item in list)
+         // updates the deductions specified in list
+         for (var item in list)
             if (list[item]) {
                var pct = ($scope.data.deductions[item].pct / 100);
                $scope.data.deductions[item].kg = ($scope.data.netWeight * pct).toFixed();
             }
 
+         // updates humidity if required
          if (humidity) {
             var pct = ($scope.data.deductions.humidity.pct - 13) * 1.3;
             $scope.data.deductions.humidity.kg = ($scope.data.netWeight * (pct / 100)).toFixed();
          }
 
+         // updates humidity if required
          if (drying) {
+            // prepares a partial sum of deductions to calculate the deduction for drying costs
+            var deductionsPct = 0;
+            for (var it in {humidity: 1, impurities: 1, misc: 1, badGrain: 1})
+               deductionsPct += $scope.data.deductions[it].pct;
+
             var pct = ($scope.data.deductions.drying.pct / 100);
-            $scope.data.deductions.drying.kg = ($scope.data.netWeight * (pct / 100)).toFixed();
+            var netWeightAfterDeductions = $scope.data.netWeight * (1 - (deductionsPct / 100));
+
+            $scope.data.deductions.drying.kg = (netWeightAfterDeductions * pct).toFixed();
          }
 
          $scope.updateNetWeightFinal();
