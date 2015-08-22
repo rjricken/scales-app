@@ -19,8 +19,41 @@
 
 <body>
 
-  <div class="container" ng-view></div>
+  <div class="container">
 
+    <div ng-view></div>
+
+    <footer class="footer hidden-print">
+      <p>&copy; Ricardo Junkes Ricken, 2015
+        <a href="" data-toggle="modal" data-target="#devContactInfo">
+          <span class="glyphicon glyphicon-info-sign"></span>
+        </a>
+      </p>
+
+      <!-- Modal with contact information -->
+      <div class="modal fade" id="devContactInfo" tabindex="-1" role="dialog" aria-labelledby="contactLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="contactLabel">Contato</h4>
+            </div>
+            <div class="modal-body">
+              <div>
+                <ul class="list-unstyled">
+                  <li><span class="glyphicon glyphicon-phone"></span>&nbsp;(48) 9611-5181</li>
+                  <li><span class="glyphicon glyphicon-phone-alt"></span>&nbsp;(48) 3463-2310</li>
+                  <li><span class="glyphicon glyphicon-envelope"></span>&nbsp;<a href="mailto:ricardoricken@gmail.com>">ricardoricken@gmail.com</a></li>
+                </ul>
+              </div>
+            </div><!-- /modal-body -->
+          </div><!-- /modal-content -->
+        </div><!-- /modal-dialog -->
+      </div><!-- /modal -->
+    </footer>
+
+  </div>
+  
   <!-- Core JavaScript libraries
 	================================================== -->
   <script src="components/jquery/dist/jquery.min.js"></script>
