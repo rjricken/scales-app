@@ -30,6 +30,7 @@ scalesFactories.factory("DataModel", function () {
       return data;
    };
 
+   // Resets the data to default values
    dataService.reset = function () {
       data.grossWeight = data.tareWeight = data.netWeight = 0;
 
