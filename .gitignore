@@ -2,6 +2,7 @@ logs/*
 !.gitkeep
 node_modules/
 components/
+deploy-tools/scales/
 project-info/
 tmp
 .DS_Store

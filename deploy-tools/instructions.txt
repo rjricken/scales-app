@@ -1,0 +1,9 @@
+1. Run 'make-prod-package.bat' to create a folder called "scales/" with the application production code.
+2. Serve the create folder in a web server (i.e. Apache).
+
+How to run Apache as a Windows service:
+
+httpd.exe -k install
+httpd.exe -k start
+
+PS: Might need to edit httpd.conf.
