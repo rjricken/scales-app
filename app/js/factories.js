@@ -53,21 +53,5 @@ scalesFactories.factory("DataModel", function () {
    data.date = new Date();
    data.inTime = new Date(1990, 1, 1, now.getHours(), now.getMinutes());
 
-
-
-   // delete me
-   data.grossWeight = 20000;
-   data.tareWeight = 7400;
-   data.supplier = "Emerson Westrup";
-   data.product = "Arroz em Casca";
-   data.plate = "MFX-3247";
-
-   data.deductions.humidity.pct = 18;
-   data.deductions.impurities.pct = 6.5;
-   data.deductions.badGrain.pct = 3.2;
-   data.deductions.misc.pct = 0.5;
-   // /delete me
-
-
    return dataService;
 });
