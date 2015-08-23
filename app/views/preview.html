@@ -32,7 +32,7 @@
   <div class="row insert-gap">
     <div class="col-xs-2 text-right">Entrada:</div>
     <div class="col-xs-4">{{ data.inTime | date:'H:mm' }}</div>
-    <div class="col-xs-6 text-right">Placa: {{ data.plate }}</div>
+    <div class="col-xs-6 text-right">Placa: {{ data.plate | uppercase }}</div>
     <div class="col-xs-2 text-right">Saída:</div>
     <div class="col-xs-10">{{ data.outTime | date:'H:mm' }}</div>
   </div>

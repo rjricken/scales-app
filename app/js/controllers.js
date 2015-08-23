@@ -121,6 +121,10 @@ scalesControllers.controller('ScalesPreviewCtrl', ['$scope', '$location', 'DataM
    function ($scope, $location, DataModel) {
       $scope.data = DataModel.get();
 
+      // Fixes how the license plate is displayed
+      if (!$scope.data.plate.match(/[A-Za-z]{3}-\d{4}/))
+         $scope.data.plate = $scope.data.plate.replace(/([A-Za-z]{3})(\d{4})/, "$1-$2");
+
       numeral.language('pt-br');
 
       $scope.changeView = function (path) {
