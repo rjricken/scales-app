@@ -122,9 +122,11 @@ body
     .row.text-center
     {
         margin-top: 1em;
+        margin-left: 0;
+        margin-right: 0;
     }
 
-    .row.page-header
+    .page-header
     {
         margin-top: 1em;
         margin-bottom: .5em;
@@ -136,6 +138,12 @@ body
         border-bottom: 1px solid black;
     }
 
+    h5
+    {
+        margin-top: 1.5em;
+        margin-bottom: .3em;
+    }
+
     address
     {
         margin-bottom: 0;
@@ -145,3 +153,4 @@ body
     {
         margin-top: 1em;
     }
+}

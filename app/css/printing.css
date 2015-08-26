@@ -9,44 +9,43 @@ body
     background-color: #FFFFFF;
     color: black;
     margin: 0px 20mm; /* the margin on the content before printing */
-    font-size: 1.2em;
+    font-size: 1.0em;
 }
 
 address
 {
     margin-bottom: 0;
+    line-height: 1em;
+    font-size: 1.0em;
 }
 
 .page-header h5
 {
-    margin-bottom: 1mm;
+    line-height: 1em;
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .page-header
 {
     border-bottom-color: black;
-    margin-bottom: 2mm;
-    margin-top: 8mm;
+    margin-bottom: 0;
 }
 
 .col-md-12.page-header
 {
-    margin-top: 2mm;
-    margin-bottom: 2mm;
+    margin-top: 1mm;
+    margin-bottom: 1mm;
     padding-bottom: 0;
 }
 
 .row.insert-gap
 {
-    margin-bottom: 3mm;
+    margin-bottom: 1mm;
 }
 
-.no-left-padding
-{
-    padding-left: 0;
-}
-
-.row.page-header
+.page-header
 {
     margin-top: 0;
     margin-bottom: 2mm;
@@ -54,11 +53,21 @@ address
 
 .sc-preview
 {
-    line-height: 1.2em;
+    line-height: 1.0em;
 }
 
 .sc-signatures .col-xs-offset-1
 {
-    margin-top: 6mm;
+    margin-top: 4mm;
     border-bottom: 1px solid black;
+}
+
+.no-padding
+{
+    padding: 0;
+}
+
+.no-left-padding
+{
+    padding-left: 0;
 }

@@ -18,7 +18,7 @@
   </button>
 </div>
 
-<div class="container sc-preview">
+<div class="sc-preview clearfix">
   <div class="row text-center">
     <div class="col-md-12 page-header">
       <h5><strong><em>CEREALISTA AGROWESTRUP LTDA</em></strong></h5>
@@ -29,25 +29,34 @@
       </address>
     </div>
   </div>
-  <div class="row insert-gap">
-    <div class="col-xs-2 text-right">Entrada:</div>
-    <div class="col-xs-4">{{ data.inTime | date:'H:mm' }}</div>
-    <div class="col-xs-6 text-right">Placa: {{ data.plate | uppercase }}</div>
-    <div class="col-xs-2 text-right">Saída:</div>
-    <div class="col-xs-10">{{ data.outTime | date:'H:mm' }}</div>
-  </div>
 
   <div class="row">
-    <div class="col-xs-2 text-right">Fornecedor:</div>
-    <div class="col-xs-10">{{ data.supplier | uppercase }}</div>
+    <div class="col-xs-2 text-right">Origem:</div>
+    <div class="col-xs-6 no-left-padding">{{ data.supplier | uppercase }}</div>
+    <div class="col-xs-4">
+      <div class="col-xs-7 text-right no-padding">Placa:</div>
+      <div class="col-xs-5 text-right no-padding">{{ data.plate | uppercase }}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 text-right">Destino:</div>
+    <div class="col-xs-6 no-left-padding">{{ data.buyer | uppercase }}</div>
+    <div class="col-xs-4"> 
+      <div class="col-xs-7 no-padding text-right">Entrada:</div>
+      <div class="col-xs-5 no-padding text-right">{{ data.inTime | date:'H:mm' }} </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-xs-2 text-right">Produto:</div>
-    <div class="col-xs-10">{{ data.product | uppercase }}</div>
+    <div class="col-xs-6 no-left-padding">{{ data.product | uppercase }}</div>
+    <div class="col-xs-4">
+      <div class="col-xs-7 no-padding text-right">Saída:</div>
+      <div class="col-xs-5 no-padding text-right">{{ data.outTime | date:'H:mm' }}</div>
+    </div>
   </div>
   <div class="row insert-gap">
     <div class="col-xs-2 text-right">Emissão:</div>
-    <div class="col-xs-10">{{ data.date | date:'dd/MM/yyyy' }}</div>
+    <div class="col-xs-10 no-left-padding">{{ data.date | date:'dd/MM/yyyy' }}</div>
   </div>
 
   <div class="row">
@@ -78,7 +87,7 @@
     </div>
   </div>
 
-  <div class="row page-header"></div>
+  <div class="page-header"></div>
 
   <div class="row">
     <div class="col-xs-2 text-right">Umidade:</div>
@@ -101,6 +110,16 @@
     <div class="col-xs-2 text-right">{{ data.deductions.impurities.pct | numeral:'0.0' }} %</div>
   </div>
   <div class="row">
+    <div class="col-xs-2 text-right">Secagem:</div>
+    <div class="col-xs-2">
+      <div class="row">
+        <div class="col-xs-8 text-right">{{ data.deductions.drying.kg }}</div>
+        <div class="col-xs-4 no-left-padding">KG</div>
+      </div>
+    </div>
+    <div class="col-xs-2 text-right">{{ data.deductions.drying.pct | numeral:'0.0' }} %</div>
+  </div>
+  <div class="row">
     <div class="col-xs-2 text-right">Gesso:</div>
     <div class="col-xs-2">
       <div class="row">
@@ -120,18 +139,8 @@
     </div>
     <div class="col-xs-2 text-right">{{ data.deductions.misc.pct | numeral:'0.0' }} %</div>
   </div>
-  <div class="row">
-    <div class="col-xs-2 text-right">Secagem:</div>
-    <div class="col-xs-2">
-      <div class="row">
-        <div class="col-xs-8 text-right">{{ data.deductions.drying.kg }}</div>
-        <div class="col-xs-4 no-left-padding">KG</div>
-      </div>
-    </div>
-    <div class="col-xs-2 text-right">{{ data.deductions.drying.pct | numeral:'0.0' }} %</div>
-  </div>
 
-  <div class="row page-header"></div>
+  <div class="page-header"></div>
 
   <div class="row insert-gap">
     <div class="col-xs-2 text-right">Líquido:</div>

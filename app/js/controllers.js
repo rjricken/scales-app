@@ -14,23 +14,23 @@ scalesControllers.controller('ScalesFormCtrl', ['$scope', '$location', 'DataMode
       // <-- Watchers ------------------------------------------>
 
       $scope.$watch('data.deductions.humidity.pct', function () {
-         $scope.updateDeductions({}, true);
+         $scope.updateDeductions({ humidity: true });
       });
 
       $scope.$watch('data.deductions.impurities.pct', function () {
-         $scope.updateDeductions({ impurities: true }, false);
+         $scope.updateDeductions({ impurities: true });
       });
 
       $scope.$watch('data.deductions.badGrain.pct', function () {
-         $scope.updateDeductions({ badGrain: true }, false);
+         $scope.updateDeductions({}, { badGrain: true });
       });
 
       $scope.$watch('data.deductions.drying.pct', function () {
-         $scope.updateDeductions({}, false, true);
+         $scope.updateDeductions({}, { drying: true });
       });
 
       $scope.$watch('data.deductions.misc.pct', function () {
-         $scope.updateDeductions({ misc: true }, false);
+         $scope.updateDeductions({}, { misc: true });
       });
 
       $scope.$watchGroup(['data.grossWeight', 'data.tareWeight'], function (newValues) {
@@ -62,41 +62,35 @@ scalesControllers.controller('ScalesFormCtrl', ['$scope', '$location', 'DataMode
       };
 
       // Updates the values in Kg for each deduction type.
-      // @param list A list containing the deductions to update
-      // @param humidity Whether humidity should be updated or not
-      // @param drying Whether drying should be updated or not
-      $scope.updateDeductions = function (list, humidity, drying) {
-         list = list || { impurities: true, badGrain: true, misc: true };
-         humidity = humidity || true;
-         drying = drying || true;
+      // @param preDeductions A list containing which deductions to update (over the balance)
+      // @param postDeductions A list containing which deductions to update (over the partial net weight)
+      $scope.updateDeductions = function (preDeductions, postDeductions) {
+         preDeductions = preDeductions || { humidity: true, impurities: true };
+         postDeductions = postDeductions || { drying: true, badGrain: true, misc: true };
 
-         // updates the deductions specified in list
-         for (var item in list)
-            if (list[item]) {
-               var pct = ($scope.data.deductions[item].pct / 100);
-               $scope.data.deductions[item].kg = ($scope.data.netWeight * pct).toFixed();
-            }
-
-         // updates humidity if required
-         if (humidity) {
-            var pct = ($scope.data.deductions.humidity.pct - 13) * 1.3;
+         // updates humidity
+         if (preDeductions.humidity) {
+            //var pct = ($scope.data.deductions.humidity.pct - 13) * 1.3;
+            var pct = $scope.data.deductions.humidity.getPct();
             $scope.data.deductions.humidity.kg = ($scope.data.netWeight * (pct / 100)).toFixed();
          }
 
-         // updates humidity if required
-         if (drying) {
-
-            // prepares a partial sum of deductions to calculate the drying costs
-            var deductionsPct = 0;
-            for (var it in { humidity: 1, impurities: 1, misc: 1, badGrain: 1 })
-               deductionsPct += $scope.data.deductions[it].pct;
-
-            // drying costs are calculated on top of the net weight after deductions
-            var pct = ($scope.data.deductions.drying.pct / 100);
-            var netWeightAfterDeductions = $scope.data.netWeight * (1 - (deductionsPct / 100));
-
-            $scope.data.deductions.drying.kg = (netWeightAfterDeductions * pct).toFixed();
+         // updates impurities
+         if (preDeductions.impurities) {
+            var pct = ($scope.data.deductions.impurities.pct / 100);
+            $scope.data.deductions.impurities.kg = ($scope.data.netWeight * pct).toFixed();
          }
+
+         // prepares a partial value for the net weight with the pre deductions computed in
+         var preDeductionPct = $scope.data.deductions.humidity.getPct() + $scope.data.deductions.impurities.pct;
+         var partialNetWeight = $scope.data.netWeight * (1 - (preDeductionPct / 100));
+
+         // compute the post deductions from the partial net weight
+         for (var item in postDeductions)
+            if (postDeductions[item]) {
+               var pct = ($scope.data.deductions[item].pct / 100);
+               $scope.data.deductions[item].kg = (partialNetWeight * pct).toFixed();
+            }
 
          // any changes to deductions affect the final net weight
          $scope.updateNetWeightFinal();

@@ -7,7 +7,13 @@ scalesFactories.factory("DataModel", function () {
       netWeight: 0,
       
       deductions: {
-         humidity: { pct: 13, kg: 0 },
+         humidity: {
+            pct: 13,
+            kg: 0,
+            getRealPct: function () {
+               return (data.deductions.humidity.pct - 13) * 1.3;
+            }
+         },
          impurities: { pct: 0, kg: 0 },
          badGrain: { pct: 0, kg: 0 },
          misc: { pct: 0, kg: 0 },
@@ -22,8 +28,14 @@ scalesFactories.factory("DataModel", function () {
       date: new Date(),
       plate: "",
       supplier: "",
+      buyer: "",
       product: ""
    };
+
+   data.deductions.humidity.getPct = function () {
+      return (this.pct - 13) * 1.3;
+   }
+
    var dataService = {};
 
    dataService.get = function () {
@@ -40,7 +52,7 @@ scalesFactories.factory("DataModel", function () {
       data.deductions.humidity.pct = 13;
 
       data.netWeightFinal.kg = data.netWeightFinal.sacks = 0;
-      data.plate = data.supplier = data.product = "";
+      data.plate = data.supplier = data.buyer = data.product = "";
 
       var now = new Date();
 
